@@ -20,7 +20,7 @@ manifest:
 
   remotes:
     - name: upstream
-      url-base: https://github.com/zephyrproject-rtos
+      url-base: https://gitee.com/chisuhua
 
   #
   # Please add items below based on alphabetical order
