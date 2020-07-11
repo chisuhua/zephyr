@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+
+
+config BOARD
+	default "ppu32"
+	depends on BOARD_PPU32
+

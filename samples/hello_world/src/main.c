@@ -9,5 +9,8 @@
 
 void main(void)
 {
+    while(100000) {
 	printk("Hello World! %s\n", CONFIG_BOARD);
+    }
+	// printf("Hello World in printf! %s\n", CONFIG_BOARD);
 }

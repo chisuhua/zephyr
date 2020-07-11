@@ -1,0 +1,29 @@
+/* Copyright (c) 2018 SiFive, Inc. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
+/dts-v1/;
+
+#include <ppu32.dtsi>
+
+/ {
+	model = "ppu_riscv";
+	compatible = "ppu,riscv";
+	aliases {
+		uart-0 = &ns16550_uart;
+	};
+
+	chosen {
+		zephyr,console = &ns16550_uart;
+		zephyr,shell-uart = &ns16550_uart;
+		zephyr,flash = &flash0;
+		zephyr,sram = &sram0;
+	};
+
+};
+
+
+&ns16550_uart {
+	status = "okay";
+	current-speed = <115200>;
+	// clock-frequency = <66000000>;
+};

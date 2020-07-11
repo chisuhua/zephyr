@@ -1,0 +1,65 @@
+/*
+ * Copyright (c) 2018 Chi Suhua
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+/ {
+	#address-cells = <1>;
+	#size-cells = <1>;
+
+	cpus {
+		#address-cells = <1>;
+		#size-cells = <0>;
+                cpu: cpu@0 {
+			device_type = "cpu";
+			compatible = "ppu", "riscv";
+			clock-frequency = <0>;
+			riscv,isa = "rv64imac";
+			reg = <0>;
+			hlic: interrupt-controller {
+				#interrupt-cells = <1>;
+				compatible = "riscv,cpu-intc";
+				interrupt-controller;
+			};
+		};
+	};
+
+	soc {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		compatible = "simple-bus";
+		interrupt-parent = <&hlic>;
+		ranges;
+
+		flash0: flash@0 {
+			compatible = "soc-nv-flash";
+			reg = <0x0 0x40000>;
+		};
+
+		sram0: memory@40000 {
+			compatible = "mmio-sram";
+			reg = <0x00040000 0x40000>;
+		};
+/*
+		uart0: uart@70013000 {
+			compatible = "ppu,coreuart";
+			reg = <0x70013000 0x1000>;
+			label = "uart_0";
+			status = "disabled";
+			current-speed = <0>;
+			clock-frequency = <0>;
+		};
+*/
+
+		ns16550_uart: uart@70013000 {
+			compatible = "ns16550";
+			reg = <0x70013000 0x400>;
+			interrupts = <1>;
+			clock-frequency = <50000000>;
+			label = "UART_0";
+
+			status = "disabled";
+		};
+
+	};
+};

@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: Apache-2.0
+
+config BOARD_PPU32
+	bool "PPU32 target"
+	#depends on SOC_RISCV_SIFIVE_FREEDOM
+	depends on SOC_RISCV32_PPU
