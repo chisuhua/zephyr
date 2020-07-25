@@ -114,6 +114,15 @@ config 64BIT
 	  soc/**/Kconfig, or boards/**/Kconfig and the user should generally
 	  avoid modifying it.
 
+config GEM5
+	bool
+	help
+	  This option tells the build system that the target system is
+	  using a gem5. This option is selected by arch/$ARCH/Kconfig,
+	  soc/**/Kconfig, or boards/**/Kconfig and the user should generally
+	  avoid modifying it.
+
+
 # Workaround for not being able to have commas in macro arguments
 DT_CHOSEN_Z_SRAM := zephyr,sram
 

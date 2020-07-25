@@ -22,3 +22,16 @@ config BOARD_NATIVE_POSIX_64BIT
 	  It provides some minimal needed models:
 	  An interrupt controller, timer (system tick), and redirects kernel prints to
 	  stdout.
+
+config BOARD_NATIVE_POSIX_64BIT_GEM5
+	bool "Native POSIX for 64-bit host in gem5"
+	depends on SOC_POSIX
+	select BOARD_NATIVE_POSIX
+	select 64BIT
+	select GEM5
+	help
+	  Will produce a console Linux process which can be executed natively
+	  as a 64-bit executable. and run on gem5
+	  It provides some minimal needed models:
+	  An interrupt controller, timer (system tick), and redirects kernel prints to
+	  stdout.

@@ -24,7 +24,7 @@ zephyr_library_sources_ifdef(CONFIG_POSIX_MQUEUE mqueue.c)
 zephyr_library_sources_ifdef(CONFIG_POSIX_FS fs.c)
 zephyr_library_sources_ifdef(CONFIG_EVENTFD eventfd.c)
 
-if(NOT (CONFIG_BOARD_NATIVE_POSIX OR CONFIG_BOARD_NATIVE_POSIX_64BIT))
+if(NOT (CONFIG_BOARD_NATIVE_POSIX OR CONFIG_BOARD_NATIVE_POSIX_64BIT OR CONFIG_BOARD_NATIVE_POSIX_64BIT_GEM5))
 zephyr_library_sources(nanosleep.c)
 endif()
 

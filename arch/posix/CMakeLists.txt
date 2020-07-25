@@ -4,13 +4,18 @@ if(EXISTS ${CMAKE_CURRENT_LIST_DIR}/${CMAKE_HOST_SYSTEM_NAME}.${CMAKE_HOST_SYSTE
   # @Intent: Set necessary compiler & linker options for this specific host architecture & OS
   include(${CMAKE_HOST_SYSTEM_NAME}.${CMAKE_HOST_SYSTEM_PROCESSOR}.cmake)
 else()
-  if (CONFIG_64BIT)
-    # some gcc versions fail to build without -fPIC
-    zephyr_compile_options(-m64 -fPIC)
-    zephyr_link_libraries(-m64)
+  if (CONFIG_GEM5)
+    zephyr_compile_options(-m64 -fPIC -shared -fvisibility=hidden)
+    zephyr_link_libraries(-m64 -shared -fvisibility=hidden)
   else ()
-    zephyr_compile_options(-m32)
-    zephyr_link_libraries(-m32)
+    if (CONFIG_64BIT)
+      # some gcc versions fail to build without -fPIC
+      zephyr_compile_options(-m64 -fPIC)
+      zephyr_link_libraries(-m64)
+    else ()
+      zephyr_compile_options(-m32)
+      zephyr_link_libraries(-m32)
+    endif ()
   endif ()
 endif()
 

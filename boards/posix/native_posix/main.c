@@ -52,8 +52,13 @@ void posix_exit(int exit_code)
  * This is the actual main for the Linux process,
  * the Zephyr application main is renamed something else thru a define.
  */
+#ifdef CONFIG_GEM5
+__attribute__((visibility("default"))) int gem5_main(int argc, char *argv[])
+{
+#else
 int main(int argc, char *argv[])
 {
+#endif
 	run_native_tasks(_NATIVE_PRE_BOOT_1_LEVEL);
 
 	native_handle_cmd_line(argc, argv);
