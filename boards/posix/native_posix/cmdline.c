@@ -15,6 +15,7 @@
 #include "toolchain.h"
 #include <arch/posix/posix_trace.h>
 #include "native_tracing.h"
+#include "gem5_api.h"
 
 static int s_argc, test_argc;
 static char **s_argv, **test_argv;
@@ -105,7 +106,14 @@ static void print_invalid_opt_error(char *argv)
 				   argv);
 
 }
-
+/*
+void* get_gem5api_vector(void *api) {
+    static void* gem5api;
+    if (api != NULL) gem5api = api;
+    return gem5api;
+}
+*/
+extern void* (*gem5api_vector)[];
 /**
  * Handle possible command line arguments.
  *
@@ -117,14 +125,22 @@ void native_handle_cmd_line(int argc, char *argv[])
 
 	native_add_tracing_options();
 	native_add_testargs_option();
+#ifdef CONFIG_GEM5
+	// native_add_gem5_options();
+    // get_gem5api_vector(argv[1]);
+    gem5api_vector = *(void*(*)[])(argv[1]);
+#endif
 
 	s_argv = argv;
 	s_argc = argc;
 
 	cmd_args_set_defaults(args_struct);
 
+#ifdef CONFIG_GEM5
+	for (i = 2; i < argc; i++) {
+#else
 	for (i = 1; i < argc; i++) {
-
+#endif
 		if ((cmd_is_option(argv[i], "testargs", 0))) {
 			test_argc = argc - i - 1;
 			test_argv = &argv[i+1];

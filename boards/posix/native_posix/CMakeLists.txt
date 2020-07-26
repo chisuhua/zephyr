@@ -16,6 +16,10 @@ zephyr_library_sources(
 	cmdline.c
 	)
 
+#zephyr_library_sources_ifdef(CONFIG_GEM5
+#	gem5_api.c
+#	)
+
 zephyr_library_include_directories(
   ${ZEPHYR_BASE}/kernel/include
   ${ZEPHYR_BASE}/arch/posix/include
